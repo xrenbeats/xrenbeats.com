@@ -1,1 +1,36 @@
-<iframe src="https://55gms.github.io/55GMS/" width="100%" height="600"></iframe>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Math in Music Theory</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <style>
+    body {
+      margin: 0;
+      background: #0f0f0f;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      padding: 10px;
+      text-align: center;
+      background: #1a1a1a;
+      font-size: 20px;
+    }
+
+    iframe {
+      border: none;
+      width: 100%;
+      height: calc(100vh - 50px);
+    }
+  </style>
+</head>
+
+<body>
+  <header>Math in Music Theory</header>
+
+  <iframe src="https://55gms.github.io/55GMS/"></iframe>
+</body>
+</html>
