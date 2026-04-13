@@ -1,14 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Unblocker</title>
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; }
-        iframe { width: 100%; height: 100%; border: none; }
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #000; }
+        #unblocker-frame { width: 100%; height: 100%; border: none; }
     </style>
 </head>
 <body>
 
-    <iframe src="https://55gms.com"></iframe>
+    <div id="container" style="width:100%; height:100%;"></div>
+
+    <script>
+        // Using JavaScript to create and insert the iframe
+        const container = document.getElementById('container');
+        const iframe = document.createElement('iframe');
+        
+        iframe.id = "unblocker-frame";
+        iframe.src = "https://55gms.com";
+        iframe.allow = "fullscreen";
+        
+        container.appendChild(iframe);
+    </script>
 </body>
 </html>
