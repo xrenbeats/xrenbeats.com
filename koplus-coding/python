@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Browser Python Editor</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  body { font-family: monospace; background: #1e1e1e; color: #dcdcdc; padding: 20px; }
+  textarea { width: 100%; height: 250px; background: #2e2e2e; color: #dcdcdc; border: none; padding: 10px; font-family: monospace; font-size: 14px; }
+  pre { background: #2e2e2e; padding: 10px; min-height: 100px; white-space: pre-wrap; }
+  button { padding: 10px 20px; margin: 10px 5px 10px 0; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<h1>KOPLUS Python editor - free, and open source! the easiest code editor with no ads. 😎</h1>
+
+<textarea id="code"># Write your Python code here
+print("Hello world!")
+</textarea>
+
+<br>
+<button onclick="runCode()">Run Code</button>
+<button onclick="aiSuggestion()">AI Suggestion</button>
+
+<h2>Output:</h2>
+<pre id="output"></pre>
+
+<!-- Load Pyodide -->
+<script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
+<script>
+  let pyodideReadyPromise = loadPyodide();
+
+  async function runCode() {
+    const code = document.getElementById('code').value;
+    const outputEl = document.getElementById('output');
+    outputEl.textContent = "Running...\n";
+    const pyodide = await pyodideReadyPromise;
+    try {
+      let result = await pyodide.runPythonAsync(code);
+      if (result !== undefined) {
+        outputEl.textContent = result;
+      } else {
+        outputEl.textContent += "Execution finished.";
+      }
+    } catch (err) {
+      outputEl.textContent = "Error:\n" + err;
+    }
+  }
+
+  function aiSuggestion() {
+    const suggestion = "\n# AI Suggestion:\ndef greet():\n    print('Hello from AI!')\n";
+    const codeEl = document.getElementById('code');
+    codeEl.value += suggestion;
+    document.getElementById('output').textContent = "AI suggestion added!";
+  }
+</script>
+
+</body>
+</html>
