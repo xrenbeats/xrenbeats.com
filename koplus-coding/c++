@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>KOPLUS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  body { font-family: monospace; background: #1e1e1e; color: #dcdcdc; padding: 20px; }
+  textarea { width: 100%; height: 250px; background: #2e2e2e; color: #dcdcdc; border: none; padding: 10px; font-family: monospace; font-size: 14px; }
+  pre { background: #2e2e2e; padding: 10px; min-height: 100px; white-space: pre-wrap; }
+  button { padding: 10px 20px; margin: 10px 5px 10px 0; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<h1>KOPLUS - Free Code Editor! Open-source, free, and no ads!</h1>
+
+<textarea id="code">
+#include <iostream>
+
+int main() {
+    std::cout << "Hello, world!" << std::endl;
+    return 0;
+}
+</textarea>
+
+<br>
+<button onclick="runCode()">Run Code</button>
+<button onclick="suggestCode()">AI Suggestion</button>
+
+<h2>Output:</h2>
+<pre id="output"></pre>
+
+<script src="https://cdn.jsdelivr.net/gh/kripken/clang.js/clang.js"></script>
+
+<script>
+  const outputEl = document.getElementById('output');
+
+  function runCode() {
+    const code = document.getElementById('code').value;
+    outputEl.textContent = "Running...\n";
+
+    try {
+      Clang().then(clang => {
+        clang.ccall('ccall', 'string', ['string'], [code]).then(result => {
+          outputEl.textContent = result || "Execution finished.";
+        }).catch(err => {
+          outputEl.textContent = "Error: " + err;
+        });
+      });
+    } catch (e) {
+      outputEl.textContent = "Execution error: " + e;
+    }
+  }
+
+// open source forever !!
+  function suggestCode() {
+    const suggestion = "\n// AI Suggestion:\nvoid greet() {\n    std::cout << \"Hello from AI!\" << std::endl;\n}\n";
+    const codeEl = document.getElementById('code');
+    codeEl.value += suggestion;
+    outputEl.textContent = "AI suggestion added!";
+  }
+</script>
+
+</body>
+</html>
