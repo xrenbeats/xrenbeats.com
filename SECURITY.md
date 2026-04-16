@@ -1,1 +1,1 @@
-we are making a windows and max application. coming soon!!!
+we are making a windows and mac application. coming soon!!!
